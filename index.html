@@ -343,6 +343,38 @@
   }
   .auth-alt-link:active{background:var(--indigo-soft)}
 
+  /* --- PIN 6 dígitos (principal) --- */
+  .pin-section{margin:10px 0 4px}
+  .pin-label{font-size:15px;font-weight:800;color:var(--ink);text-align:center;margin-bottom:14px}
+  .pin-boxes{display:flex;justify-content:center;gap:9px;margin-bottom:18px}
+  .pin-box{
+    width:42px;height:52px;border:2.2px solid var(--line);border-radius:12px;
+    font-size:22px;font-weight:900;text-align:center;color:var(--ink);
+    background:#fff;outline:none;caret-color:transparent;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .pin-box:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(247,127,0,.18)}
+  .pin-box.filled{border-color:var(--indigo);background:var(--indigo-soft)}
+  .pin-box.filled::placeholder{color:transparent}
+
+  .btn-auth-pin{
+    width:100%;padding:15px;border-radius:14px;
+    background:var(--orange);color:#fff;font-size:17px;font-weight:900;
+    letter-spacing:.3px;opacity:.45;transition:opacity .2s,background .2s;
+  }
+  .btn-auth-pin.ready{opacity:1}
+  .btn-auth-pin.ready:active{background:var(--orange-2)}
+
+  /* --- Huella (secundaria) --- */
+  .bio-alt{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+  .bio-alt-btn{
+    display:flex;align-items:center;gap:8px;
+    font-size:14px;font-weight:800;color:var(--indigo);padding:8px 16px;
+    border-radius:12px;background:var(--indigo-soft);
+  }
+  .bio-alt-btn:active{background:#dde4f5}
+  .bio-alt-btn .fp-ic{width:22px;height:22px;flex-shrink:0}
+
   .auth-feedback{margin-top:8px;text-align:center;font-size:14px;font-weight:800;min-height:20px}
   .auth-feedback.err{color:var(--red)}
   .auth-feedback.ok{color:var(--green)}
@@ -382,7 +414,7 @@
     <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.5h2"/></g></symbol>
     <symbol id="i-mic" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3Zm5-3a1 1 0 0 0-2 0 3 3 0 0 1-6 0 1 1 0 0 0-2 0 5 5 0 0 0 4 4.9V18H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.1A5 5 0 0 0 17 11Z"/></symbol>
     <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.5a2.8 2.8 0 1 1 4.5 2.2c-1 .7-1.8 1.2-1.8 2.4"/></g><circle cx="12" cy="17.1" r="1.1" fill="currentColor"/></symbol>
-    <symbol id="i-fingerprint" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.66-1.34-3-3-3s-3 1.34-3 3c0 2.5 1.5 4.5 3 6"/><path d="M12 7c-2.76 0-5 2.24-5 5 0 3.5 2 6 5 8"/><path d="M15 11c0-3.31-2.69-6-6-6-2.5 0-4.66 1.53-5.56 3.7"/><path d="M18 11c0-4.97-4.03-9-9-9-3.9 0-7.23 2.5-8.48 6"/><path d="M12 15c0 2-1 4-2.5 5.5"/><path d="M15 15c0 2.8-1.5 5.2-3.5 6.5"/></g></symbol>
+    <symbol id="i-fingerprint" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41a.493.493 0 0 1-.68-.19.493.493 0 0 1 .19-.68C7.85 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67a.49.49 0 0 1-.44.28z"/><path d="M3.5 9.72a.499.499 0 0 1-.41-.79C4.2 7.37 5.37 6.2 6.8 5.42a.5.5 0 1 1 .48.87C5.97 7.05 4.96 8.1 4 9.5c-.09.15-.25.22-.5.22z"/><path d="M21.48 9.93c-.17 0-.34-.08-.43-.24A9.16 9.16 0 0 0 17.2 6.4a.5.5 0 0 1 .4-.92 10.2 10.2 0 0 1 4.32 3.69.5.5 0 0 1-.44.76z"/><path d="M12 6c-3.31 0-6 2.69-6 6 0 1.78.39 3.33 1.08 4.51l-1.06.61C5.35 15.67 5 13.88 5 12 5 8.13 8.13 5 12 5s7 3.13 7 7c0 1.88-.35 3.67-.99 5.13l-1.08-.6C17.61 15.33 18 13.78 18 12c0-3.31-2.69-6-6-6z"/><path d="M12 10c-1.1 0-2 .9-2 2 0 3.46-.97 5.33-2.18 7.04l.92.62C9.96 17.93 11 15.81 11 12c0-.55.45-1 1-1s1 .45 1 1c0 4.08 1.49 6.25 2.07 6.96l.84-.68C15.44 17.67 14 15.36 14 12c0-1.1-.9-2-2-2z"/><path d="M12 14c-.55 0-1-.45-1-1v-1c0-.55.45-1 1-1s1 .45 1 1v1c0 .55-.45 1-1 1z"/></g></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s8 3 8 9c0 5.5-5.5 8.5-8 9.5-2.5-1-8-4-8-9.5 0-6 8-9 8-9Z"/><path d="M9 12l2 2 4-4"/></g></symbol>
     <symbol id="i-replay" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></g></symbol>
   </defs>
@@ -605,20 +637,40 @@
         <div class="auth-row tot"><span>Monto:</span> <span id="authAmount" style="color:var(--orange)">$30.000</span></div>
       </div>
 
-      <div class="bio-zone">
-        <button class="bio-circle-btn" id="authBioBtn" aria-label="Tocar el sensor para autorizar con huella digital">
-          <svg class="ic"><use href="#i-fingerprint" xlink:href="#i-fingerprint"/></svg>
-        </button>
-        <div class="bio-label" id="bioLabel">Toca el círculo con tu huella</div>
-        <div class="bio-sub">Autorización protegida</div>
+      <!-- PIN principal -->
+      <div class="pin-section">
+        <div class="pin-label">Ingresa tu clave BE Pass</div>
+        <div class="pin-boxes" id="pinBoxes">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 1">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 2">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 3">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 4">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 5">
+          <input class="pin-box" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" autocomplete="off" aria-label="Dígito 6">
+        </div>
+        <button class="btn-auth-pin" id="authPinConfirmBtn" disabled>Autorizar</button>
       </div>
 
-      <button class="auth-alt-link" id="authPinBtn">O ingresa tu clave BE Pass de 6 dígitos</button>
+      <!-- Huella secundaria -->
+      <div class="bio-alt">
+        <button class="bio-alt-btn" id="authBioBtn" aria-label="Autorizar con huella digital">
+          <svg class="fp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41a.493.493 0 0 1-.68-.19.493.493 0 0 1 .19-.68C7.85 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67a.49.49 0 0 1-.44.28z"/>
+            <path d="M3.5 9.72a.499.499 0 0 1-.41-.79C4.2 7.37 5.37 6.2 6.8 5.42a.5.5 0 1 1 .48.87C5.97 7.05 4.96 8.1 4 9.5c-.09.15-.25.22-.5.22z"/>
+            <path d="M21.48 9.93c-.17 0-.34-.08-.43-.24A9.16 9.16 0 0 0 17.2 6.4a.5.5 0 0 1 .4-.92 10.2 10.2 0 0 1 4.32 3.69.5.5 0 0 1-.44.76z"/>
+            <path d="M12 6c-3.31 0-6 2.69-6 6 0 1.78.39 3.33 1.08 4.51l-1.06.61C5.35 15.67 5 13.88 5 12 5 8.13 8.13 5 12 5s7 3.13 7 7c0 1.88-.35 3.67-.99 5.13l-1.08-.6C17.61 15.33 18 13.78 18 12c0-3.31-2.69-6-6-6z"/>
+            <path d="M12 10c-1.1 0-2 .9-2 2 0 3.46-.97 5.33-2.18 7.04l.92.62C9.96 17.93 11 15.81 11 12c0-.55.45-1 1-1s1 .45 1 1c0 4.08 1.49 6.25 2.07 6.96l.84-.68C15.44 17.67 14 15.36 14 12c0-1.1-.9-2-2-2z"/>
+            <path d="M12 14c-.55 0-1-.45-1-1v-1c0-.55.45-1 1-1s1 .45 1 1v1c0 .55-.45 1-1 1z"/>
+          </svg>
+          Usar huella digital
+        </button>
+      </div>
 
       <div class="auth-feedback" id="authFeedback"></div>
+      <div id="bioLabel" style="display:none"></div>
 
       <div class="demo-strip">
-        <button class="demo-tag" id="authFailBtn">🧪 Probar error de huella</button>
+        <button class="demo-tag" id="authFailBtn">🧪 Probar error</button>
       </div>
     </div>
   </div>
@@ -784,8 +836,9 @@ function detectIntent(raw){
       summary=$('summary'),continueBtn=$('continueBtn');
 
   var authOverlay=$('authOverlay'),authBioBtn=$('authBioBtn'),bioLabel=$('bioLabel'),
-      authPinBtn=$('authPinBtn'),authFailBtn=$('authFailBtn'),authCloseBtn=$('authCloseBtn'),
-      authFeedback=$('authFeedback'),authDest=$('authDest'),authAmount=$('authAmount');
+      authPinConfirmBtn=$('authPinConfirmBtn'),authFailBtn=$('authFailBtn'),authCloseBtn=$('authCloseBtn'),
+      authFeedback=$('authFeedback'),authDest=$('authDest'),authAmount=$('authAmount'),
+      pinBoxes=Array.from(document.querySelectorAll('.pin-box'));
 
   var S={view:'home',step:'home',dest:null,amount:null,pending:null,balance:100065};
   var panelOpen=false,wantListen=false,busy=false,speaking=false,listening=false,thinking=false;
@@ -1248,18 +1301,25 @@ function detectIntent(raw){
   }
 
   /* Paso BE Pass */
+  function resetPinBoxes(){
+    pinBoxes.forEach(function(b){ b.value=''; b.classList.remove('filled'); });
+    authPinConfirmBtn.disabled=true;
+    authPinConfirmBtn.classList.remove('ready');
+  }
+
   async function promptSecurityAuth(){
     S.step='auth';
     var c=CONTACTS[S.dest];
     authDest.textContent=c.name;
     authAmount.textContent=money(S.amount);
     authFeedback.textContent=''; authFeedback.className='auth-feedback';
-    bioLabel.textContent='Toca el círculo con tu huella';
-    authBioBtn.classList.remove('scanning');
+    resetPinBoxes();
     authOverlay.classList.add('active');
-    
-    return say('Por seguridad, autoriza la transferencia con tu huella en pantalla o con tu clave BE Pass.',
-               'Por seguridad, autoriza la transferencia con tu huella en la pantalla o con tu clave BE Pass.');
+    // Enfocar primer dígito tras la animación
+    setTimeout(function(){ pinBoxes[0] && pinBoxes[0].focus(); }, 420);
+
+    return say('Por seguridad, ingresa tu clave BE Pass de 6 dígitos o usa tu huella digital.',
+               'Por seguridad, ingresa tu clave BE Pass de 6 dígitos o usa tu huella digital.');
   }
 
   async function stepAuth(raw){
@@ -1270,27 +1330,37 @@ function detectIntent(raw){
     if(hasAny(norm(raw),['autorizar','autorizo','huella','clave','si','confirmo','confirmar'])){
       return triggerBiometricSuccess();
     }
-    return say('Toca el círculo de huella en pantalla para autorizar, o cierra la ventana para detener.');
+    return say('Ingresa tu clave BE Pass de 6 dígitos en pantalla, o cierra la ventana para detener.');
   }
 
   function closeSecurityAuth(){
     authOverlay.classList.remove('active');
+    resetPinBoxes();
   }
 
-  async function triggerBiometricSuccess(){
-    authBioBtn.classList.add('scanning');
-    bioLabel.textContent='Verificando identidad…';
-    authFeedback.textContent='✓ Sensor reconocido correctamente';
+  async function triggerPinSuccess(){
+    authFeedback.textContent='✓ Clave correcta. Autorizando…';
     authFeedback.className='auth-feedback ok';
+    authPinConfirmBtn.disabled=true;
     await sleep(900);
     closeSecurityAuth();
     return executeTransfer();
   }
 
+  async function triggerBiometricSuccess(){
+    authBioBtn.classList.add('scanning');
+    authFeedback.textContent='✓ Huella reconocida. Autorizando…';
+    authFeedback.className='auth-feedback ok';
+    await sleep(900);
+    authBioBtn.classList.remove('scanning');
+    closeSecurityAuth();
+    return executeTransfer();
+  }
+
   async function triggerBiometricFailure(){
-    authFeedback.textContent='✕ Huella no reconocida. Intenta de nuevo.';
+    authFeedback.textContent='✕ Huella no reconocida. Intenta de nuevo o usa tu clave.';
     authFeedback.className='auth-feedback err';
-    say('Validación fallida. No se reconoció la huella. Intenta de nuevo o ingresa tu clave.');
+    say('Validación fallida. No se reconoció la huella. Intenta de nuevo o ingresa tu clave BE Pass.');
   }
 
   async function cancelTransfer(){
@@ -1457,9 +1527,41 @@ function detectIntent(raw){
   $('exitBtn').addEventListener('click',function(){ resetTransfer(); S.step='home'; goView('home'); });
   
   authBioBtn.addEventListener('click',triggerBiometricSuccess);
-  authPinBtn.addEventListener('click',triggerBiometricSuccess);
   authFailBtn.addEventListener('click',triggerBiometricFailure);
   authCloseBtn.addEventListener('click',cancelTransfer);
+  authPinConfirmBtn.addEventListener('click',triggerPinSuccess);
+
+  /* PIN: auto-avance entre cajas, backspace, habilitación del botón Autorizar */
+  function checkPinReady(){
+    var full=pinBoxes.every(function(b){ return b.value.length===1; });
+    authPinConfirmBtn.disabled=!full;
+    if(full){ authPinConfirmBtn.classList.add('ready'); }
+    else     { authPinConfirmBtn.classList.remove('ready'); }
+  }
+  pinBoxes.forEach(function(box, idx){
+    box.addEventListener('input',function(){
+      // Solo aceptar dígitos
+      box.value=box.value.replace(/\D/g,'').slice(-1);
+      if(box.value){ box.classList.add('filled'); } else { box.classList.remove('filled'); }
+      checkPinReady();
+      if(box.value && idx < pinBoxes.length-1){ pinBoxes[idx+1].focus(); }
+      // Si ya están los 6 dígitos, enfocar el botón Autorizar
+      if(pinBoxes.every(function(b){ return b.value.length===1; })){ authPinConfirmBtn.focus(); }
+    });
+    box.addEventListener('keydown',function(e){
+      if(e.key==='Backspace'&&!box.value&&idx>0){ pinBoxes[idx-1].focus(); pinBoxes[idx-1].value=''; pinBoxes[idx-1].classList.remove('filled'); checkPinReady(); }
+      if(e.key==='Enter'&&!authPinConfirmBtn.disabled){ triggerPinSuccess(); }
+    });
+    // Pegar el PIN completo de una vez
+    box.addEventListener('paste',function(e){
+      e.preventDefault();
+      var digits=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+      digits.split('').forEach(function(d,i){ if(pinBoxes[i]){ pinBoxes[i].value=d; pinBoxes[i].classList.add('filled'); } });
+      checkPinReady();
+      var next=Math.min(digits.length, pinBoxes.length-1);
+      pinBoxes[next].focus();
+    });
+  });
 
   app.addEventListener('click',function(e){
     var d=e.target.closest ? e.target.closest('.dead') : null;
