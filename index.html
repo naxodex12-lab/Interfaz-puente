@@ -173,13 +173,6 @@
   .field.filled .fcard{border-color:var(--teal);background:var(--mint);box-shadow:0 0 0 3px rgba(46,196,164,.15)}
   .field.has-error .fcard{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(217,56,58,.15)}
   .amount-big{font-size:24px;font-weight:900}
-  .amount-input-row{display:flex;align-items:center;gap:6px;cursor:text}
-  .amount-prefix{font-size:24px;font-weight:900;color:var(--ink);user-select:none}
-  .amount-input{
-    border:none;background:transparent;width:100%;font-size:24px;font-weight:900;
-    color:var(--ink);font-family:inherit;outline:none;padding:2px 0;
-  }
-  .amount-input::placeholder{color:#5C677D;font-size:15px;font-weight:700}
   .amount-err{font-size:14px;font-weight:800;color:var(--red);margin-top:6px;line-height:1.3}
   
   /* Spotlight y oscurecimiento en el formulario de transferencia */
@@ -232,19 +225,11 @@
     box-shadow:0 8px 22px rgba(13,27,62,.35);
     transition:all .35s var(--ease);
     animation:fab-pulse 3s ease-out infinite;
-    touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;
   }
-  .fab .ic{width:36px;height:36px;pointer-events:none}
+  .fab .ic{width:36px;height:36px}
   .fab:active{transform:scale(.92)}
-  .fab.dragging{
-    cursor:grabbing;transition:none !important;animation:none;
-    transform:scale(1.08);box-shadow:0 14px 32px rgba(13,27,62,.52);
-  }
-  .fab.snapping{
-    transition:left .32s cubic-bezier(.22,1,.36,1), top .32s cubic-bezier(.22,1,.36,1), transform .25s var(--ease), opacity .35s var(--ease);
-  }
   .fab.hidden{opacity:0;pointer-events:none;transform:scale(.6);animation:none}
-  .app[data-view="transfer"] .fab:not([data-custom-pos="true"]){bottom:54px}
+  .app[data-view="transfer"] .fab{bottom:54px}
   .app[data-view="receipt"] .fab{display:none}
   @keyframes fab-pulse{0%{box-shadow:0 8px 22px rgba(13,27,62,.35),0 0 0 0 rgba(46,196,164,.55)}70%,100%{box-shadow:0 8px 22px rgba(13,27,62,.35),0 0 0 16px rgba(46,196,164,0)}}
 
@@ -311,23 +296,6 @@
     margin-top:8px;background:#fff;color:#9B1C1C;border:1.5px solid #9B1C1C;font-size:13px;font-weight:800;
     padding:6px 12px;border-radius:8px;display:inline-block;
   }
-
-  /* Opciones "A terceros / Entre mis cuentas" integradas dentro del rectángulo azul */
-  .sheet-tx-options{display:none;flex-direction:column;gap:8px;margin:10px 0 4px}
-  .sheet-tx-options.show{display:flex;animation:msg-in .35s var(--ease)}
-  .sheet-opt-btn{
-    display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:16px;
-    background:#F4F7FF;border:2px solid #C8D6F5;text-align:left;transition:all .2s ease;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
-  }
-  .sheet-opt-btn:active{background:#E3ECFF;border-color:var(--teal);transform:scale(.98)}
-  .sheet-opt-ic{
-    width:40px;height:40px;border-radius:12px;background:#DDE6FA;color:var(--indigo);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .sheet-opt-ic svg{width:22px;height:22px}
-  .sheet-opt-title{font-size:15px;font-weight:900;color:var(--indigo)}
-  .sheet-opt-sub{font-size:12px;color:#334987;margin-top:1px;font-weight:700}
 
   /* Zona inferior: Chips + Micrófono */
   .sheet-bottom{display:flex;align-items:flex-end;gap:10px;margin-top:12px}
@@ -459,7 +427,7 @@
   }
   
   /* Lista de contactos alfabética */
-  .recipients-scroll{background:var(--bg);padding:8px 0 380px}
+  .recipients-scroll{background:var(--bg);padding:8px 0 100px}
   .contact-letter-group{margin-bottom:10px}
   .contact-letter-header{
     padding:6px 16px;font-size:13px;font-weight:900;color:var(--indigo);
@@ -477,8 +445,7 @@
   }
   .contact-info{flex:1;min-width:0}
   .contact-name{font-size:15px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .contact-rut{font-size:13px;color:var(--indigo);font-weight:800;margin-top:2px}
-  .contact-meta{font-size:12px;color:var(--muted);font-weight:700;margin-top:1px}
+  .contact-meta{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
   .contact-arrow{color:var(--line);width:18px;height:18px;flex-shrink:0}
 
   /* ================= MODAL SEGURIDAD BE PASS (ALTA FIDELIDAD) ================= */
@@ -541,91 +508,11 @@
   }
   .btn-bepass-reject:active{opacity:.7}
   
-  .bepass-bio-options{
-    display:flex;flex-direction:column;gap:8px;margin-top:14px;
+  .bepass-bio-secondary{
+    display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;
+    font-size:13px;font-weight:700;color:var(--muted);padding:6px;cursor:pointer;
   }
-  .bepass-bio-btn{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    width:100%;padding:12px 14px;border-radius:16px;
-    background:#F4F6FB;border:1.5px solid #DCE2F0;
-    font-size:14px;font-weight:800;color:var(--indigo);cursor:pointer;
-    transition:all .2s ease;
-  }
-  .bepass-bio-btn:active{background:var(--indigo-soft);transform:scale(.98)}
-  .bepass-bio-btn svg{width:22px;height:22px;color:var(--indigo);flex-shrink:0}
-  .bepass-bio-btn.face-btn{background:#EDFAF5;border-color:#A5E8D2;color:#0A6E57}
-  .bepass-bio-btn.face-btn svg{color:#00B67A}
-
-  /* ================= ESCÁNER DE VERIFICACIÓN FACIAL (CÁMARA EN VIVO / SIMULADA) ================= */
-  .face-auth-overlay{
-    position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(10,20,48,.92);
-    z-index:52;opacity:0;visibility:hidden;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;padding:20px;transition:all .32s var(--ease);
-  }
-  .face-auth-overlay.active{opacity:1;visibility:visible}
-  .face-auth-card{
-    background:#fff;border-radius:26px;padding:22px 20px 20px;width:92%;max-width:340px;
-    display:flex;flex-direction:column;align-items:center;text-align:center;
-    box-shadow:0 18px 44px rgba(0,0,0,.45);position:relative;
-  }
-  .face-auth-title{font-size:18px;font-weight:900;color:var(--ink);margin-bottom:4px}
-  .face-auth-sub{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:16px;line-height:1.35}
-  .face-cam-frame{
-    position:relative;width:196px;height:196px;border-radius:50%;overflow:hidden;
-    background:radial-gradient(circle at 50% 40%, #1F3268 0%, #0D1B3E 100%);
-    border:4px solid #13D698;box-shadow:0 0 0 6px rgba(19,214,152,.18), 0 10px 28px rgba(13,27,62,.3);
-    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
-    transition:border-color .3s, box-shadow .3s;
-  }
-  .face-cam-frame.verified{
-    border-color:var(--green);box-shadow:0 0 0 8px rgba(13,143,114,.25), 0 10px 28px rgba(13,143,114,.3);
-  }
-  .face-cam-video{
-    position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;
-    transform:scaleX(-1);opacity:0;transition:opacity .3s;
-  }
-  .face-cam-video.live{opacity:1}
-  .face-cam-avatar{
-    width:110px;height:110px;color:rgba(255,255,255,.85);z-index:1;pointer-events:none;
-    transition:opacity .3s;
-  }
-  .face-cam-video.live ~ .face-cam-avatar{opacity:.28}
-  .face-oval-guide{
-    position:absolute;inset:14px;border:2.5px dashed rgba(255,255,255,.75);
-    border-radius:50%;z-index:2;pointer-events:none;
-  }
-  .face-scan-laser{
-    position:absolute;left:10%;right:10%;height:3px;border-radius:3px;
-    background:linear-gradient(90deg, transparent 0%, #13D698 50%, transparent 100%);
-    box-shadow:0 0 12px 2px rgba(19,214,152,.9);z-index:3;
-    animation:face-laser-move 1.8s ease-in-out infinite alternate;
-  }
-  .face-cam-frame.verified .face-scan-laser{display:none}
-  @keyframes face-laser-move{
-    0%{top:18%}
-    100%{top:82%}
-  }
-  .face-verified-badge{
-    position:absolute;inset:0;background:rgba(13,143,114,.82);z-index:4;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    color:#fff;opacity:0;pointer-events:none;transition:opacity .28s var(--ease);
-  }
-  .face-cam-frame.verified .face-verified-badge{opacity:1}
-  .face-verified-badge svg{width:56px;height:56px;margin-bottom:4px}
-  .face-status-pill{
-    display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:20px;
-    background:#E8FAF3;color:#0A6E57;font-size:14px;font-weight:800;margin-bottom:14px;
-  }
-  .face-status-dot{
-    width:9px;height:9px;border-radius:50%;background:#00B67A;
-    animation:face-dot-pulse 1s ease-in-out infinite;
-  }
-  @keyframes face-dot-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.45}}
-  .btn-face-cancel{
-    width:100%;padding:11px;border-radius:22px;background:#F0F2F6;color:var(--ink);
-    font-size:14px;font-weight:800;border:none;cursor:pointer;
-  }
-  .btn-face-cancel:active{background:#E2E6EF}
+  .bepass-bio-secondary svg{width:18px;height:18px;color:var(--indigo)}
 
   /* ================= OVERLAY CARGA Y AUTORIZACIÓN BE PASS ================= */
   .tx-loading-overlay{
@@ -746,7 +633,6 @@
     <symbol id="i-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><polygon fill="currentColor" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></g></symbol>
-    <symbol id="i-face" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9.5 15a3.5 3.5 0 0 0 5 0"/><path d="M12 10v2.5"/></g></symbol>
   </defs>
 </svg>
 
@@ -894,11 +780,7 @@
         <div class="field" id="fAmount" data-f="amount">
           <div class="lbl">Ingresa un monto <svg class="ic tick"><use href="#i-check" xlink:href="#i-check"/></svg></div>
           <div class="fcard" id="fAmountCard">
-            <div class="amount-input-row" id="amountInputRow">
-              <span class="amount-prefix" id="amountPrefix" style="display:none">$</span>
-              <input type="text" inputmode="numeric" class="amount-input" id="amountInput" placeholder="Toca aquí para escribir el monto o dilo por voz" autocomplete="off" aria-label="Ingresa un monto">
-            </div>
-            <div class="amount-big ph" id="amountVal" style="display:none">Aún no lo has dicho</div>
+            <div class="amount-big ph" id="amountVal" style="font-size:16px;font-weight:600">Aún no lo has dicho</div>
             <div class="amount-err" id="amountErr"></div>
           </div>
         </div>
@@ -1011,23 +893,6 @@
       </div>
     </div>
 
-    <div class="sheet-tx-options" id="sheetTxOptions" aria-label="Opciones de transferencia">
-      <button type="button" class="sheet-opt-btn" id="sheetOptThirdParty">
-        <div class="sheet-opt-ic"><svg class="ic"><use href="#i-users" xlink:href="#i-users"/></svg></div>
-        <div>
-          <div class="sheet-opt-title">Mis contactos</div>
-          <div class="sheet-opt-sub">Transfiere a personas guardadas o a otro banco</div>
-        </div>
-      </button>
-      <button type="button" class="sheet-opt-btn" id="sheetOptBetweenAccounts">
-        <div class="sheet-opt-ic"><svg class="ic"><use href="#i-accounts" xlink:href="#i-accounts"/></svg></div>
-        <div>
-          <div class="sheet-opt-title">Entre mis cuentas</div>
-          <div class="sheet-opt-sub">Mueve dinero entre tu CuentaRUT y Ahorros</div>
-        </div>
-      </button>
-    </div>
-
     <div class="sheet-bottom">
       <div class="chips" id="chips"></div>
       <button class="mic idle" id="mic" aria-label="Hablar o interrumpir para responder"><svg class="ic"><use href="#i-mic" xlink:href="#i-mic"/></svg><span class="ring"></span></button>
@@ -1072,8 +937,8 @@
         <button class="tx-opt-btn" id="btnOptThirdParty">
           <div class="tx-opt-ic"><svg class="ic"><use href="#i-users" xlink:href="#i-users"/></svg></div>
           <div>
-            <div class="tx-opt-title">Mis contactos</div>
-            <div class="tx-opt-sub">Transfiere a personas guardadas o a otro banco</div>
+            <div class="tx-opt-title">A terceros</div>
+            <div class="tx-opt-sub">Transfiere a cuentas de otras personas o bancos</div>
           </div>
         </button>
         <button class="tx-opt-btn" id="btnOptBetweenAccounts">
@@ -1106,7 +971,7 @@
         </div>
       </div>
 
-      <div class="bepass-prompt">Ingresa tu clave de seguridad de 6 números<div style="font-size:12px;font-weight:600;color:var(--muted);margin-top:3px">(Clave BE Pass)</div></div>
+      <div class="bepass-prompt">Ingresa tu clave BE Pass</div>
 
       <!-- Casilleros de 6 dígitos -->
       <div class="bepass-inputs" id="bepassInputs">
@@ -1119,22 +984,16 @@
       </div>
 
       <!-- Botón Autorizar principal -->
-      <button class="btn-bepass-auth" id="authPinConfirmBtn" disabled>Confirmar transferencia</button>
-
-      <!-- Opciones alternativas amigables: Rostro y Huella digital -->
-      <div class="bepass-bio-options">
-        <button type="button" class="bepass-bio-btn face-btn" id="authFaceBtn" aria-label="Verificar con mi cara">
-          <svg class="ic"><use href="#i-face" xlink:href="#i-face"/></svg>
-          <span>Verificar con mi cara</span>
-        </button>
-        <button type="button" class="bepass-bio-btn" id="authBioBtn" aria-label="Confirmar con huella digital">
-          <svg class="ic"><use href="#i-fingerprint" xlink:href="#i-fingerprint"/></svg>
-          <span>Confirmar con mi huella</span>
-        </button>
-      </div>
+      <button class="btn-bepass-auth" id="authPinConfirmBtn" disabled>Autorizar</button>
 
       <!-- Botón Rechazar secundario -->
-      <button class="btn-bepass-reject" id="btnBepassReject">Cancelar transferencia</button>
+      <button class="btn-bepass-reject" id="btnBepassReject">Rechazar</button>
+
+      <!-- Huella secundaria alternativa -->
+      <div class="bepass-bio-secondary" id="authBioBtn" role="button" aria-label="Usar huella digital">
+        <svg class="ic"><use href="#i-fingerprint" xlink:href="#i-fingerprint"/></svg>
+        <span>O autorizar con huella digital</span>
+      </div>
 
       <div class="auth-feedback" id="authFeedback"></div>
       <div id="authDest" style="display:none"></div>
@@ -1142,42 +1001,12 @@
     </div>
   </div>
 
-  <!-- ================= MODAL DE VERIFICACIÓN CON LA CARA (CÁMARA EN VIVO / SIMULADA) ================= -->
-  <div class="face-auth-overlay" id="faceAuthOverlay" role="dialog" aria-modal="true" aria-label="Verificación con tu cara">
-    <div class="face-auth-card">
-      <div class="face-auth-title">Verificación con tu cara</div>
-      <div class="face-auth-sub" id="faceAuthSub">Mira de frente a la pantalla con calma</div>
-
-      <div class="face-cam-frame" id="faceCamFrame">
-        <video class="face-cam-video" id="faceCamVideo" autoplay playsinline muted></video>
-        <svg class="face-cam-avatar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="10" r="3.5"/>
-          <path d="M6 19.5c1.4-2.8 3.5-4.2 6-4.2s4.6 1.4 6 4.2"/>
-          <path d="M7 4H5a2 2 0 0 0-2 2v2M17 4h2a2 2 0 0 1 2 2v2M7 20H5a2 2 0 0 1-2-2v-2M17 20h2a2 2 0 0 0 2-2v-2"/>
-        </svg>
-        <div class="face-oval-guide"></div>
-        <div class="face-scan-laser"></div>
-        <div class="face-verified-badge" id="faceVerifiedBadge">
-          <svg class="ic"><use href="#i-check" xlink:href="#i-check"/></svg>
-          <span style="font-size:15px;font-weight:900">¡Rostro reconocido!</span>
-        </div>
-      </div>
-
-      <div class="face-status-pill" id="faceStatusPill">
-        <span class="face-status-dot"></span>
-        <span id="faceStatusText">Reconociendo tu rostro…</span>
-      </div>
-
-      <button type="button" class="btn-face-cancel" id="btnFaceCancel">Usar mi clave de 6 números</button>
-    </div>
-  </div>
-
   <!-- ================= OVERLAY CARGA Y CHECK DE AUTORIZACIÓN ================= -->
-  <div class="tx-loading-overlay" id="txLoadingOverlay" role="dialog" aria-modal="true" aria-label="Confirmando operación">
+  <div class="tx-loading-overlay" id="txLoadingOverlay" role="dialog" aria-modal="true" aria-label="Autorizando operación">
     <div class="tx-loading-card" id="txLoadingCard">
       <div class="tx-spinner" id="txSpinner"></div>
       <div class="tx-check-circle" id="txCheckCircle"><svg class="ic"><use href="#i-check" xlink:href="#i-check"/></svg></div>
-      <div class="tx-loading-title" id="txLoadingTitle">Verificando tu clave de seguridad…</div>
+      <div class="tx-loading-title" id="txLoadingTitle">Autorizando con BE Pass…</div>
     </div>
   </div>
 
@@ -1347,8 +1176,7 @@ function detectIntent(raw){
 
   /* Bottom sheet menú "¿Qué necesitas hacer?" */
   var txSheetOverlay=$('txSheetOverlay'),btnTxSheetClose=$('btnTxSheetClose'),
-      btnOptThirdParty=$('btnOptThirdParty'),btnOptBetweenAccounts=$('btnOptBetweenAccounts'),
-      sheetTxOptions=$('sheetTxOptions'),sheetOptThirdParty=$('sheetOptThirdParty'),sheetOptBetweenAccounts=$('sheetOptBetweenAccounts');
+      btnOptThirdParty=$('btnOptThirdParty'),btnOptBetweenAccounts=$('btnOptBetweenAccounts');
 
   /* Vista Destinatarios */
   var btnRecipientsBack=$('btnRecipientsBack'),btnNewRecipient=$('btnNewRecipient'),
@@ -1358,19 +1186,15 @@ function detectIntent(raw){
 
   /* Vista Formulario Transferencia */
   var fDest=$('fDest'),destName=$('destName'),destRut=$('destRut'),destBank=$('destBank'),
-      fAmount=$('fAmount'),fAmountCard=$('fAmountCard'),amountVal=$('amountVal'),
-      amountInput=$('amountInput'),amountPrefix=$('amountPrefix'),amountErr=$('amountErr'),
+      fAmount=$('fAmount'),amountVal=$('amountVal'),amountErr=$('amountErr'),
       summary=$('summary'),continueBtn=$('continueBtn');
 
-  /* Modal de Seguridad y Verificación Facial */
+  /* Modal BE Pass */
   var authOverlay=$('authOverlay'),authCloseBtn=$('authCloseBtn'),
       authPinConfirmBtn=$('authPinConfirmBtn'),btnBepassReject=$('btnBepassReject'),
-      authBioBtn=$('authBioBtn'),authFaceBtn=$('authFaceBtn'),authFeedback=$('authFeedback'),
+      authBioBtn=$('authBioBtn'),authFeedback=$('authFeedback'),
       authDest=$('authDest'),authAmount=$('authAmount'),
-      bepassInputs=Array.from(document.querySelectorAll('.bepass-box')),
-      faceAuthOverlay=$('faceAuthOverlay'),faceCamFrame=$('faceCamFrame'),
-      faceCamVideo=$('faceCamVideo'),faceStatusText=$('faceStatusText'),
-      faceAuthSub=$('faceAuthSub'),btnFaceCancel=$('btnFaceCancel');
+      bepassInputs=Array.from(document.querySelectorAll('.bepass-box'));
 
   /* Overlay de Carga / Check de Autorización */
   var txLoadingOverlay=$('txLoadingOverlay'),txLoadingCard=$('txLoadingCard'),
@@ -1387,7 +1211,7 @@ function detectIntent(raw){
 
   var S={view:'home',step:'home',dest:null,amount:null,pending:null,balance:100065};
   var panelOpen=false,wantListen=false,busy=false,speaking=false,listening=false,thinking=false;
-  var gotFinal=false,session=0,greeted=false,interruptedGreeting=false,thinkingLabel='';
+  var gotFinal=false,session=0,greeted=false,thinkingLabel='';
   var lastSpokenText='', lastDisplayText='';
 
   var inactivityTimer=null, inactivityCount=0, INACTIVITY_LIMIT_MS=30000;
@@ -1527,7 +1351,6 @@ function detectIntent(raw){
         html += '  <div class="contact-avatar">' + initials + '</div>';
         html += '  <div class="contact-info">';
         html += '    <div class="contact-name">' + c.name + '</div>';
-        html += '    <div class="contact-rut">RUT ' + c.rut + '</div>';
         html += '    <div class="contact-meta">' + c.bank + ' · ' + c.account + '</div>';
         html += '  </div>';
         html += '  <svg class="ic contact-arrow"><use href="#i-chev" xlink:href="#i-chev"/></svg>';
@@ -1551,54 +1374,30 @@ function detectIntent(raw){
     S.dest = key;
     var c = CONTACTS[key];
 
-    // 1. Limpiar cualquier selección previa y activar Spotlight sobre el contacto elegido
-    if(contactListContainer){
-      Array.prototype.forEach.call(contactListContainer.querySelectorAll('.contact-item.spotlight-target'), function(el){
-        el.classList.remove('spotlight-target');
-      });
-    }
+    // 1. Efecto Spotlight: oscurecer la pantalla menos el contacto elegido
     var targetEl = contactListContainer ? contactListContainer.querySelector('.contact-item[data-key="' + key + '"]') : null;
     if(targetEl && recipientsScroll){
       recipientsScroll.classList.add('spotlight-active');
       targetEl.classList.add('spotlight-target');
-    }
-
-    // 2. Establecer el paso de confirmación y chips ANTES de medir para conocer la altura exacta del rectángulo azul
-    S.step = 'confirm_recipient';
-    renderChips();
-
-    var msgDisplay = '¿Quieres transferirle a ' + c.name + '?\nRUT ' + c.rut + ' · ' + c.bank + ' (' + c.account + ').\n¿Es la persona que buscas?';
-    var msgSpoken = '¿Quieres transferirle a ' + c.name + '? RUT ' + rutSpoken(c.rut) + ', ' + c.bank + ', ' + c.account + '. ¿Es la persona que buscas?';
-
-    // 3. Elevar automáticamente el contacto en la lista para que su Nombre, RUT, Banco y Cuenta
-    // queden siempre en la zona despejada ARRIBA del rectángulo azul del asistente
-    function scrollContactAboveSheet(){
-      if(!targetEl || !recipientsScroll) return;
+      
+      // Asegurar que el marco principal y ventana jamÃ¡s se desplacen verticalmente
       app.scrollTop = 0;
       window.scrollTo(0, 0);
 
-      var scrollRect = recipientsScroll.getBoundingClientRect();
-      var targetRect = targetEl.getBoundingClientRect();
-      var sheetRect = sheet.classList.contains('open') ? sheet.getBoundingClientRect() : null;
-
-      // Límite inferior visible de la lista justo antes de que empiece el rectángulo azul
-      var visibleBottom = sheetRect ? Math.min(scrollRect.bottom, sheetRect.top) : scrollRect.bottom;
-      var visibleHeight = Math.max(96, visibleBottom - scrollRect.top);
-
-      // Posición real del contacto dentro del contenedor scrollable
-      var itemTopInScroll = (targetRect.top - scrollRect.top) + recipientsScroll.scrollTop;
-      var itemHeight = targetRect.height || targetEl.offsetHeight || 74;
-
-      // Centrar el contacto en la franja libre superior (con margen de seguridad arriba)
-      var desiredOffsetFromTop = Math.max(18, Math.min(48, (visibleHeight - itemHeight) / 2));
-      var nextScrollTop = Math.max(0, itemTopInScroll - desiredOffsetFromTop);
-
-      recipientsScroll.scrollTo({ top: nextScrollTop, behavior: 'smooth' });
+      // Desplazar recipientsScroll para que el contacto quede perfectamente visible SOBRE el asistente
+      var sheetHeight = sheet.classList.contains('open') ? (sheet.offsetHeight || 280) : 100;
+      var availHeight = Math.max(120, recipientsScroll.clientHeight - sheetHeight);
+      var offsetTarget = targetEl.offsetTop - Math.max(16, (availHeight / 2) - 30);
+      recipientsScroll.scrollTo({ top: Math.max(0, offsetTarget), behavior: 'smooth' });
     }
 
-    scrollContactAboveSheet();
-    setTimeout(scrollContactAboveSheet, 80);
+    // 2. Establecer el paso de confirmaciÃ³n y chips
+    S.step = 'confirm_recipient';
+    renderChips();
 
+    // 3. El asistente consulta explÃ­citamente si es la persona que busca (sin pasar directo a pedir monto)
+    var msgDisplay = 'Â¿Quieres transferirle a ' + c.name + '?\nRUT ' + c.rut + ' Â· ' + c.bank + ' (' + c.account + ').\nÂ¿Es la persona que buscas?';
+    var msgSpoken = 'Â¿Quieres transferirle a ' + c.name + '? RUT ' + rutSpoken(c.rut) + ', ' + c.bank + ', ' + c.account + '. Â¿Es la persona que buscas?';
     return say(msgDisplay, msgSpoken);
   }
 
@@ -1626,7 +1425,7 @@ function detectIntent(raw){
   function fillDest(){
     var c=CONTACTS[S.dest];
     destName.textContent=c.name; destName.classList.remove('ph');
-    destRut.textContent='RUT '+c.rut; destBank.textContent=c.bank+' · '+c.account;
+    destRut.textContent='RUT '+c.rut; destBank.textContent='BancoEstado · CuentaRUT';
     fDest.classList.add('filled'); settle($('fDestCard'));
   }
   function clearDest(){
@@ -1636,25 +1435,15 @@ function detectIntent(raw){
   }
   function fillAmount(){
     amountVal.textContent=money(S.amount); amountVal.classList.remove('ph','err');
-    amountVal.style.cssText='display:none';
-    if(amountInput){
-      amountInput.value = Number(S.amount).toLocaleString('es-CL');
-    }
-    if(amountPrefix){
-      amountPrefix.style.display = 'inline';
-    }
+    amountVal.style.cssText='';
     fAmount.classList.remove('has-error'); fAmount.classList.add('filled'); amountErr.textContent=''; settle($('fAmountCard'));
   }
   function clearAmount(){
-    amountVal.textContent='Aún no lo has dicho'; amountVal.className='amount-big ph'; amountVal.style.cssText='display:none';
-    if(amountInput){ amountInput.value = ''; }
-    if(amountPrefix){ amountPrefix.style.display = 'none'; }
+    amountVal.textContent='Aún no lo has dicho'; amountVal.className='amount-big ph'; amountVal.style.cssText='font-size:16px;font-weight:600';
     fAmount.classList.remove('filled','has-error'); amountErr.textContent='';
   }
   function showAmountError(a){
-    amountVal.textContent=money(a); amountVal.className='amount-big err'; amountVal.style.cssText='display:none';
-    if(amountInput){ amountInput.value = Number(a).toLocaleString('es-CL'); }
-    if(amountPrefix){ amountPrefix.style.display = 'inline'; }
+    amountVal.textContent=money(a); amountVal.className='amount-big err'; amountVal.style.cssText='';
     fAmount.classList.remove('filled'); fAmount.classList.add('has-error');
     amountErr.textContent='No cuentas con ese monto. Saldo disponible: '+money(S.balance)+'.'; settle($('fAmountCard'));
   }
@@ -1895,32 +1684,21 @@ function detectIntent(raw){
     return say('¿Cuánto dinero quieres transferirle a '+firstName(c.name)+'? Por ejemplo: “treinta mil pesos”.',
                '¿Cuánto dinero quieres transferirle a '+firstName(c.name)+'? Por ejemplo: treinta mil pesos.');
   }
-  async function promptForStep(){
-    var my = session;
+  function promptForStep(){
     switch(S.step){
       case 'home':
-        if(!greeted){
-          greeted = true;
-          interruptedGreeting = false;
-          await say('¡Hola! Qué gusto saludarte. Soy tu asistente BancoEstado y estoy aquí para ayudarte paso a paso y con total calma.',
-                    'Hola, qué gusto saludarte. Soy tu asistente BancoEstado y estoy aquí para ayudarte paso a paso y con total calma.');
-          if(!panelOpen || my !== session || S.step !== 'home' || interruptedGreeting || busy) return;
-          await sleep(220);
-          if(!panelOpen || my !== session || S.step !== 'home' || interruptedGreeting || busy) return;
-          return say('¿Qué te gustaría hacer hoy? Puedes decirme, por ejemplo: “quiero transferir” o “¿cuál es mi saldo?”.',
-                     '¿Qué te gustaría hacer hoy? Puedes decirme, por ejemplo: quiero transferir, o cuál es mi saldo.');
-        }
-        return say('¡Qué gusto verte de nuevo! ¿Qué te gustaría hacer hoy? Puedes decir: “quiero transferir” o “¿cuál es mi saldo?”.',
-                   'Qué gusto verte de nuevo. ¿Qué te gustaría hacer hoy? Puedes decir: quiero transferir, o cuál es mi saldo.');
+        if(!greeted){ greeted=true;
+          return say('¡Hola! Seré quien te ayude para que completes tu proceso sin errores. Dime qué necesitas. Por ejemplo: “quiero transferir”.',
+                     'Hola. Seré quien te ayude para que completes tu proceso sin errores. Dime qué necesitas. Por ejemplo: quiero transferir.'); }
+        return say('Hola de nuevo. ¿Qué necesitas hacer? Por ejemplo: “quiero transferir”.','Hola de nuevo. ¿Qué necesitas hacer? Por ejemplo: quiero transferir.');
       case 'choose_type':
         txSheetOverlay.classList.remove('active');
-        return say('¿Qué necesitas hacer? Puedes transferir a tus contactos o entre tus cuentas.');
+        return say('¿Qué necesitas hacer? Puedes transferir a terceros o entre tus cuentas.');
       case 'recipient': return say('¿A quién le quieres transferir dinero? Dime su nombre o elígelo en la lista.');
       case 'confirm_recipient': return recipientAsk(CONTACTS[S.dest]);
       case 'amount': return amountAsk();
       case 'confirm_send': return sendAsk();
-      case 'auth': return say('Por seguridad, confirma con tu clave de 6 números, o si prefieres, verifica con tu cara o con tu huella.',
-                              'Por seguridad, confirma con tu clave de seis números, o si prefieres, verifica con tu cara o con tu huella.');
+      case 'auth': return say('Por seguridad, ingresa tu clave BE Pass de 6 dígitos en la pantalla.');
     }
     return Promise.resolve();
   }
@@ -1935,41 +1713,39 @@ function detectIntent(raw){
     return say('No te entendí bien, no te preocupes. Puedes decir: “quiero transferir”, o preguntar: “¿cuál es mi saldo?”.');
   }
 
-  /* Paso "¿Qué necesitas hacer?": Mis contactos o Entre mis cuentas (dentro del rectángulo azul) */
+  /* Paso "¿Qué necesitas hacer?": A terceros o Entre mis cuentas */
   async function enterTransfer(raw){
     S.step='choose_type';
-    txSheetOverlay.classList.remove('active');
-    return say('¿Qué necesitas hacer? Puedes transferir a tus contactos o entre tus cuentas.');
+    txSheetOverlay.classList.add('active');
+    return say('¿Qué necesitas hacer? Puedes transferir a terceros o entre tus cuentas.');
   }
 
   async function stepChooseType(raw){
     var t=norm(raw);
-    if(hasAny(t, ['contactos','contacto','mis contactos','a mis contactos','terceros','tercero','a terceros','otra persona','otra cuenta','otro banco'])){
+    if(hasAny(t, ['terceros','tercero','a terceros','otra persona','otra cuenta','otro banco'])){
       txSheetOverlay.classList.remove('active');
-      S.step='recipient';
-      renderChips();
       await showTransitionLoader(750);
       resetTransfer();
       renderContactList('');
       goView('recipients');
+      S.step='recipient';
       return say('Muy bien. ¿A quién le quieres transferir dinero? Dime su nombre o elígelo en la lista.');
     }
     if(hasAny(t, ['entre mis cuentas','mis cuentas','cuenta propia','propia'])){
       txSheetOverlay.classList.remove('active');
-      await say('Por ahora solo está disponible la opción a tus contactos. Vamos a continuar a tus contactos.');
-      S.step='recipient';
-      renderChips();
+      await say('Por ahora solo está disponible la opción a terceros. Vamos a continuar a terceros.');
       await showTransitionLoader(750);
       resetTransfer();
       renderContactList('');
       goView('recipients');
+      S.step='recipient';
       return say('¿A quién le quieres transferir dinero? Dime su nombre o elígelo en la lista.');
     }
     if(isExit(raw)){
       txSheetOverlay.classList.remove('active');
       return leaveToHome(true);
     }
-    return say('Por favor dime si quieres transferir a “mis contactos” o “entre mis cuentas”.');
+    return say('Por favor dime si quieres transferir “a terceros” o “entre mis cuentas”.');
   }
 
   async function foundRecipient(key,prefix){
@@ -1992,17 +1768,17 @@ function detectIntent(raw){
     var c = extractContact(raw), yn = yesNo(raw);
     if(c && c !== S.dest) return selectRecipientFromList(c);
 
-    // Si el usuario confirma que sí es la persona que busca
+    // Si el usuario confirma que sÃ­ es la persona que busca
     if(yn === 'yes' || (c && c === S.dest && yn !== 'no')){
       // Limpiar spotlight de la lista
       if(recipientsScroll) recipientsScroll.classList.remove('spotlight-active');
       var prevTarget = contactListContainer ? contactListContainer.querySelector('.contact-item.spotlight-target') : null;
       if(prevTarget) prevTarget.classList.remove('spotlight-target');
 
-      // Transición nativa BancoEstado (< 1 seg con aureola girando)
+      // TransiciÃ³n nativa BancoEstado (< 1 seg con aureola girando)
       await showTransitionLoader(720);
 
-      // Ahora sí pasa al formulario de transferencia con foco en monto
+      // Ahora sÃ­ pasa al formulario de transferencia con foco en monto
       fillDest();
       goView('transfer');
       S.step = 'amount';
@@ -2021,11 +1797,11 @@ function detectIntent(raw){
       S.dest = null; clearDest();
       S.step = 'recipient';
       renderChips();
-      return say('Está bien. Dime a quién quieres transferirle o elígelo en la lista.');
+      return say('EstÃ¡ bien. Dime a quiÃ©n quieres transferirle o elÃ­gelo en la lista.');
     }
 
     if(isExit(raw)) return leaveToHome(true);
-    return say('¿Es la persona que buscas? Di “sí, esa es” para continuar, o “no, cambiar” si buscas a otra persona.');
+    return say('Â¿Es la persona que buscas? Di â€œsÃ­, esa esâ€ para continuar, o â€œno, cambiarâ€ si buscas a otra persona.');
   }
 
   async function setAmount(a){
@@ -2073,26 +1849,7 @@ function detectIntent(raw){
     return say('Para enviar di “confirmo”. Si prefieres cambiar algo, dime qué corregir.');
   }
 
-  /* Paso de Seguridad: Clave de 6 números, Verificación con la cara o Huella */
-  var faceStream = null;
-  var faceScanTimer = null;
-  var faceScanActive = false;
-
-  function stopFaceCamera(){
-    faceScanActive = false;
-    if(faceScanTimer){ clearTimeout(faceScanTimer); faceScanTimer = null; }
-    if(faceStream){
-      try { faceStream.getTracks().forEach(function(t){ t.stop(); }); } catch(e){}
-      faceStream = null;
-    }
-    if(faceCamVideo){
-      faceCamVideo.classList.remove('live');
-      try { faceCamVideo.srcObject = null; } catch(e){}
-    }
-    if(faceCamFrame) faceCamFrame.classList.remove('verified');
-    if(faceAuthOverlay) faceAuthOverlay.classList.remove('active');
-  }
-
+  /* Paso BE Pass */
   function resetBepassBoxes(){
     bepassInputs.forEach(function(b){ b.value=''; b.classList.remove('filled'); });
     authPinConfirmBtn.disabled=true;
@@ -2101,102 +1858,43 @@ function detectIntent(raw){
 
   async function promptSecurityAuth(){
     S.step='auth';
-    renderChips();
     resetBepassBoxes();
-    stopFaceCamera();
     authOverlay.classList.add('active');
     setTimeout(function(){ bepassInputs[0] && bepassInputs[0].focus(); }, 380);
 
-    return say('Por seguridad, confirma con tu clave de 6 números, o si prefieres, verifica con tu cara o con tu huella.',
-               'Por seguridad, confirma con tu clave de seis números, o si prefieres, verifica con tu cara o con tu huella.');
-  }
-
-  async function startFaceVerification(){
-    if(faceScanActive) return;
-    faceScanActive = true;
-    if(faceCamFrame) faceCamFrame.classList.remove('verified');
-    if(faceStatusText) faceStatusText.textContent = 'Reconociendo tu rostro…';
-    if(faceAuthSub) faceAuthSub.textContent = 'Mira de frente a la pantalla con calma';
-    if(faceAuthOverlay) faceAuthOverlay.classList.add('active');
-
-    // Intentar encender la cámara frontal real si está disponible en el dispositivo/navegador
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-      try {
-        faceStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-        if(!faceScanActive){
-          stopFaceCamera();
-          return;
-        }
-        if(faceCamVideo){
-          faceCamVideo.srcObject = faceStream;
-          faceCamVideo.classList.add('live');
-        }
-      } catch(err){
-        // Si el usuario no tiene cámara o rechaza permiso de cámara, el escáner visual asistido continúa funcionando sin bloquear
-        console.info('Usando escáner facial asistido sin cámara física:', err);
-      }
-    }
-
-    if(panelOpen){
-      say('Mira de frente a la pantalla un momento para verificar con tu cara.',
-          'Mira de frente a la pantalla un momento para verificar con tu cara.');
-    }
-
-    faceScanTimer = setTimeout(async function(){
-      if(!faceScanActive) return;
-      if(faceCamFrame) faceCamFrame.classList.add('verified');
-      if(faceStatusText) faceStatusText.textContent = '¡Identidad verificada con éxito!';
-      if(faceAuthSub) faceAuthSub.textContent = 'Todo listo, confirmando tu transferencia…';
-      await sleep(950);
-      if(!faceScanActive) return;
-      stopFaceCamera();
-      return triggerAuthSuccess('face');
-    }, 2300);
+    return say('Por seguridad, ingresa tu clave BE Pass de 6 dígitos en la pantalla.',
+               'Por seguridad, ingresa tu clave BE Pass de 6 dígitos en la pantalla.');
   }
 
   async function stepAuth(raw){
-    var t = norm(raw);
-    if(isExit(raw) || hasAny(t, NO)) {
+    if(isExit(raw) || hasAny(norm(raw),NO)) {
       closeSecurityAuth();
       return cancelTransfer();
     }
-    if(hasAny(t, ['cara','rostro','facial','camara','mirar','reconocimiento'])){
-      return startFaceVerification();
+    if(hasAny(norm(raw),['autorizar','autorizo','clave','si','confirmo','confirmar'])){
+      return triggerAuthSuccess();
     }
-    if(hasAny(t, ['huella','dedo'])){
-      return triggerAuthSuccess('fingerprint');
-    }
-    if(hasAny(t, ['autorizar','autorizo','clave','si','confirmo','confirmar','numeros'])){
-      return triggerAuthSuccess('pin');
-    }
-    return say('Puedes confirmar con tu clave de 6 números, tocar “Verificar con mi cara”, o “Confirmar con mi huella”.');
+    return say('Ingresa tu clave BE Pass de 6 dígitos en pantalla para autorizar, o presiona Rechazar.');
   }
 
   function closeSecurityAuth(){
-    stopFaceCamera();
     authOverlay.classList.remove('active');
     resetBepassBoxes();
   }
 
-  async function triggerAuthSuccess(method){
+  async function triggerAuthSuccess(){
     closeSecurityAuth();
     
-    // 1. Mostrar overlay de carga con mensaje amigable según el método elegido
+    // 1. Mostrar overlay de carga con spinner
     txLoadingOverlay.classList.add('active');
     txLoadingCard.classList.remove('success');
-    if(method === 'face'){
-      txLoadingTitle.textContent = 'Verificando con tu cara…';
-    } else if(method === 'fingerprint'){
-      txLoadingTitle.textContent = 'Confirmando con tu huella…';
-    } else {
-      txLoadingTitle.textContent = 'Confirmando con tu clave de seguridad…';
-    }
+    txLoadingTitle.textContent = 'Autorizando con BE Pass…';
     
     await sleep(1000);
 
     // 2. Transición a check verde animado
     txLoadingCard.classList.add('success');
-    txLoadingTitle.textContent = '¡Identidad confirmada!';
+    txLoadingTitle.textContent = 'Autorización realizada';
 
     await sleep(750);
 
@@ -2250,19 +1948,16 @@ function detectIntent(raw){
   function chipsFor(step){
     switch(step){
       case 'home': return ['Quiero transferir','¿Cuál es mi saldo?'];
-      case 'choose_type': return [];
+      case 'choose_type': return ['A terceros','Entre mis cuentas'];
       case 'recipient': return ['Belén Pardo','Elena Ramírez','Luis Olate'];
       case 'confirm_recipient': return ['Sí, es la persona','No, cambiar'];
       case 'amount': return ['10 mil pesos','30 mil pesos','50 mil pesos'];
       case 'confirm_send': return ['Sí, confirmo','Cambiar monto'];
-      case 'auth': return ['Verificar con mi cara','Confirmar con mi clave','Confirmar con mi huella'];
+      case 'auth': return ['Autorizar clave BE Pass'];
     }
     return [];
   }
   function renderChips(){
-    if(sheetTxOptions){
-      sheetTxOptions.classList.toggle('show', S.step === 'choose_type');
-    }
     chipsEl.innerHTML='';
     chipsFor(S.step).forEach(function(t){
       var b=document.createElement('button'); b.type='button'; b.className='chip'; 
@@ -2271,7 +1966,6 @@ function detectIntent(raw){
         resetInactivityWatchdog();
         // Si el usuario toca un botón mientras habla el asistente en CUALQUIER paso, cortar la voz
         if(speaking){
-          interruptedGreeting = true;
           skipSpeech();
           await sleep(50);
         }
@@ -2291,8 +1985,7 @@ function detectIntent(raw){
   /* Control de apertura / cierre */
   async function openAssistant(){
     if(panelOpen) return;
-    txSheetOverlay.classList.remove('active');
-    panelOpen=true; wantListen=true; interruptedGreeting=false; var my=++session;
+    panelOpen=true; wantListen=true; var my=++session;
     inactivityCount=0;
     sheet.classList.add('open'); fab.classList.add('hidden'); updateDim(); renderChips(); renderStatus(); setHeard('');
     resetInactivityWatchdog();
@@ -2320,113 +2013,11 @@ function detectIntent(raw){
     panelOpen=false; wantListen=false; session++; busy=false; thinking=false; speaking=false;
     clearTimeout(inactivityTimer);
     stopListening(); skipSpeech();
-    if(S.step==='choose_type' && S.view==='home') S.step='home';
-    if(sheetTxOptions) sheetTxOptions.classList.remove('show');
     sheet.classList.remove('open'); fab.classList.remove('hidden'); updateDim(); renderStatus();
   }
 
-  /* ================= EVENTOS Y LISTENERS (CON BURBUJA FLOTANTE ARRASTRABLE TIPO MESSENGER) ================= */
-  (function initDraggableFab(){
-    var dragging = false;
-    var hasMoved = false;
-    var suppressNextClick = false;
-    var startX = 0, startY = 0;
-    var initialLeft = 0, initialTop = 0;
-    var DRAG_THRESHOLD = 7;
-    var EDGE_MARGIN = 12;
-
-    function clamp(val, min, max){
-      return Math.max(min, Math.min(max, val));
-    }
-
-    function onPointerDown(e){
-      if(e.button !== undefined && e.button !== 0) return;
-      dragging = true;
-      hasMoved = false;
-      fab.classList.remove('snapping');
-
-      var appRect = app.getBoundingClientRect();
-      var fabRect = fab.getBoundingClientRect();
-      startX = e.clientX;
-      startY = e.clientY;
-      initialLeft = fabRect.left - appRect.left;
-      initialTop = fabRect.top - appRect.top;
-
-      if(fab.setPointerCapture && e.pointerId !== undefined){
-        try { fab.setPointerCapture(e.pointerId); } catch(err){}
-      }
-    }
-
-    function onPointerMove(e){
-      if(!dragging) return;
-      var dx = e.clientX - startX;
-      var dy = e.clientY - startY;
-
-      if(!hasMoved){
-        if(Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
-        hasMoved = true;
-        fab.classList.add('dragging');
-        fab.setAttribute('data-custom-pos', 'true');
-        fab.style.right = 'auto';
-        fab.style.bottom = 'auto';
-      }
-
-      var maxLeft = app.clientWidth - fab.offsetWidth - EDGE_MARGIN;
-      var maxTop = app.clientHeight - fab.offsetHeight - EDGE_MARGIN;
-      var nextLeft = clamp(initialLeft + dx, EDGE_MARGIN, maxLeft);
-      var nextTop = clamp(initialTop + dy, EDGE_MARGIN, maxTop);
-
-      fab.style.left = nextLeft + 'px';
-      fab.style.top = nextTop + 'px';
-    }
-
-    function onPointerUp(e){
-      if(!dragging) return;
-      dragging = false;
-
-      if(fab.releasePointerCapture && e.pointerId !== undefined){
-        try { fab.releasePointerCapture(e.pointerId); } catch(err){}
-      }
-
-      if(hasMoved){
-        suppressNextClick = true;
-        fab.classList.remove('dragging');
-        fab.classList.add('snapping');
-
-        // Efecto imán a los bordes laterales (izquierda o derecha) estilo burbuja de Messenger,
-        // manteniendo la altura vertical exacta elegida por el usuario dentro de la app
-        var currentLeft = parseFloat(fab.style.left) || initialLeft;
-        var currentTop = parseFloat(fab.style.top) || initialTop;
-        var centerX = currentLeft + (fab.offsetWidth / 2);
-        var snapLeft = (centerX < app.clientWidth / 2)
-          ? EDGE_MARGIN
-          : (app.clientWidth - fab.offsetWidth - EDGE_MARGIN);
-        var maxTop = app.clientHeight - fab.offsetHeight - EDGE_MARGIN;
-
-        fab.style.left = snapLeft + 'px';
-        fab.style.top = clamp(currentTop, EDGE_MARGIN, maxTop) + 'px';
-
-        setTimeout(function(){
-          fab.classList.remove('snapping');
-        }, 350);
-      }
-    }
-
-    fab.addEventListener('pointerdown', onPointerDown);
-    fab.addEventListener('pointermove', onPointerMove);
-    fab.addEventListener('pointerup', onPointerUp);
-    fab.addEventListener('pointercancel', onPointerUp);
-
-    fab.addEventListener('click', function(e){
-      if(suppressNextClick){
-        suppressNextClick = false;
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-      }
-      openAssistant();
-    });
-  })();
+  /* ================= EVENTOS Y LISTENERS ================= */
+  fab.addEventListener('click', openAssistant);
   btnCloseSheet.addEventListener('click', closeAssistant);
   btnGrantMic.addEventListener('click', requestMicExplicitly);
   btnHelpSteps.addEventListener('click', function(){ micGuideModal.classList.add('active'); });
@@ -2449,7 +2040,6 @@ function detectIntent(raw){
     // BARGE-IN: Si el asistente está hablando en CUALQUIER paso de la transferencia
     // (Destinatario, Monto, Confirmación, BE Pass, etc.), cortamos la voz al instante y pasamos a escuchar
     if(speaking){
-      interruptedGreeting = true;
       wantListen = true;
       heard.textContent = '';
       skipSpeech();
@@ -2479,26 +2069,13 @@ function detectIntent(raw){
     startListening();
   });
 
-  /* ================= Opciones "Mis contactos / Entre mis cuentas" dentro del rectángulo azul ================= */
-  sheetOptThirdParty.addEventListener('click', async function(){
-    resetInactivityWatchdog();
-    if(speaking){ skipSpeech(); await sleep(50); }
-    if(panelOpen) handleUtterance('Mis contactos');
-  });
-
-  sheetOptBetweenAccounts.addEventListener('click', async function(){
-    resetInactivityWatchdog();
-    if(speaking){ skipSpeech(); await sleep(50); }
-    if(panelOpen) handleUtterance('Entre mis cuentas');
-  });
-
   /* ================= NAVEGACIÓN Y BOTTOM SHEET "¿QUÉ NECESITAS HACER?" ================= */
   $('navTransfer').addEventListener('click', function(){
-    txSheetOverlay.classList.remove('active');
-    S.step = 'choose_type';
     if(!panelOpen){
-      openAssistant();
+      txSheetOverlay.classList.add('active');
     } else {
+      txSheetOverlay.classList.remove('active');
+      S.step = 'choose_type';
       promptForStep();
     }
   });
@@ -2523,7 +2100,7 @@ function detectIntent(raw){
 
   btnOptBetweenAccounts.addEventListener('click', async function(){
     txSheetOverlay.classList.remove('active');
-    toast('Por ahora continuaremos a tus contactos.');
+    toast('Por ahora continuaremos a terceros.');
     await showTransitionLoader(750);
     resetTransfer();
     renderContactList('');
@@ -2542,7 +2119,7 @@ function detectIntent(raw){
   });
 
   btnBetweenAccounts.addEventListener('click', function(){
-    toast('En este prototipo continuaremos a tus contactos.');
+    toast('En este prototipo continuaremos a terceros.');
   });
 
   contactSearchInput.addEventListener('input', function(){
@@ -2563,67 +2140,16 @@ function detectIntent(raw){
     renderContactList('');
   });
 
-  /* ================= FORMULARIO DE TRANSFERENCIA (VOZ + INGRESO MANUAL) ================= */
+  /* ================= FORMULARIO DE TRANSFERENCIA ================= */
   $('backBtn').addEventListener('click', function(){
     goView('recipients');
     S.step = 'recipient';
     if(panelOpen) promptForStep();
   });
 
-  if(fAmountCard && amountInput){
-    fAmountCard.addEventListener('click', function(){
-      amountInput.focus();
-    });
-
-    amountInput.addEventListener('input', function(){
-      var rawDigits = amountInput.value.replace(/\D/g, '');
-      if(!rawDigits){
-        S.amount = null;
-        if(amountPrefix) amountPrefix.style.display = 'none';
-        fAmount.classList.remove('filled', 'has-error');
-        amountErr.textContent = '';
-        hideSummary();
-        return;
-      }
-      var num = parseInt(rawDigits, 10);
-      if(amountPrefix) amountPrefix.style.display = 'inline';
-      amountInput.value = num.toLocaleString('es-CL');
-
-      if(num > S.balance){
-        S.amount = null;
-        fAmount.classList.remove('filled');
-        fAmount.classList.add('has-error');
-        amountErr.textContent = 'No cuentas con ese monto. Saldo disponible: ' + money(S.balance) + '.';
-        hideSummary();
-      } else if(num > 0){
-        S.amount = num;
-        fAmount.classList.remove('has-error');
-        fAmount.classList.add('filled');
-        amountErr.textContent = '';
-        S.step = 'confirm_send';
-        showSummary();
-        renderChips();
-      }
-    });
-
-    amountInput.addEventListener('keydown', async function(e){
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        amountInput.blur();
-        if(S.amount && S.amount <= S.balance){
-          setFocus('summary');
-          if(panelOpen){
-            sendAsk();
-          }
-        }
-      }
-    });
-  }
-
-  continueBtn.addEventListener('click', async function(){
-    if(!S.dest || !S.amount || S.amount > S.balance) return;
-    await showTransitionLoader(700);
-    promptSecurityAuth();
+  continueBtn.addEventListener('click', function(){
+    if(!panelOpen) openAssistant();
+    else if(S.step === 'confirm_send') sendAsk();
   });
 
   /* ================= BE PASS: CASILLEROS DE 6 DÍGITOS ================= */
@@ -2685,15 +2211,10 @@ function detectIntent(raw){
     });
   });
 
-  authPinConfirmBtn.addEventListener('click', function(){ triggerAuthSuccess('pin'); });
+  authPinConfirmBtn.addEventListener('click', triggerAuthSuccess);
   btnBepassReject.addEventListener('click', cancelTransfer);
   authCloseBtn.addEventListener('click', cancelTransfer);
-  authBioBtn.addEventListener('click', function(){ triggerAuthSuccess('fingerprint'); });
-  if(authFaceBtn) authFaceBtn.addEventListener('click', startFaceVerification);
-  if(btnFaceCancel) btnFaceCancel.addEventListener('click', function(){
-    stopFaceCamera();
-    setTimeout(function(){ bepassInputs[0] && bepassInputs[0].focus(); }, 150);
-  });
+  authBioBtn.addEventListener('click', triggerAuthSuccess);
 
   /* ================= PANTALLA DE ÉXITO ================= */
   btnGoToReceipt.addEventListener('click', function(){
