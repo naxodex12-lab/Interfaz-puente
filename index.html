@@ -173,6 +173,13 @@
   .field.filled .fcard{border-color:var(--teal);background:var(--mint);box-shadow:0 0 0 3px rgba(46,196,164,.15)}
   .field.has-error .fcard{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(217,56,58,.15)}
   .amount-big{font-size:24px;font-weight:900}
+  .amount-input-row{display:flex;align-items:center;gap:6px;cursor:text}
+  .amount-prefix{font-size:24px;font-weight:900;color:var(--ink);user-select:none}
+  .amount-input{
+    border:none;background:transparent;width:100%;font-size:24px;font-weight:900;
+    color:var(--ink);font-family:inherit;outline:none;padding:2px 0;
+  }
+  .amount-input::placeholder{color:#5C677D;font-size:15px;font-weight:700}
   .amount-err{font-size:14px;font-weight:800;color:var(--red);margin-top:6px;line-height:1.3}
   
   /* Spotlight y oscurecimiento en el formulario de transferencia */
@@ -887,7 +894,11 @@
         <div class="field" id="fAmount" data-f="amount">
           <div class="lbl">Ingresa un monto <svg class="ic tick"><use href="#i-check" xlink:href="#i-check"/></svg></div>
           <div class="fcard" id="fAmountCard">
-            <div class="amount-big ph" id="amountVal" style="font-size:16px;font-weight:600">Aún no lo has dicho</div>
+            <div class="amount-input-row" id="amountInputRow">
+              <span class="amount-prefix" id="amountPrefix" style="display:none">$</span>
+              <input type="text" inputmode="numeric" class="amount-input" id="amountInput" placeholder="Toca aquí para escribir el monto o dilo por voz" autocomplete="off" aria-label="Ingresa un monto">
+            </div>
+            <div class="amount-big ph" id="amountVal" style="display:none">Aún no lo has dicho</div>
             <div class="amount-err" id="amountErr"></div>
           </div>
         </div>
@@ -1004,8 +1015,8 @@
       <button type="button" class="sheet-opt-btn" id="sheetOptThirdParty">
         <div class="sheet-opt-ic"><svg class="ic"><use href="#i-users" xlink:href="#i-users"/></svg></div>
         <div>
-          <div class="sheet-opt-title">A terceros</div>
-          <div class="sheet-opt-sub">Transfiere a cuentas de otras personas o bancos</div>
+          <div class="sheet-opt-title">Mis contactos</div>
+          <div class="sheet-opt-sub">Transfiere a personas guardadas o a otro banco</div>
         </div>
       </button>
       <button type="button" class="sheet-opt-btn" id="sheetOptBetweenAccounts">
@@ -1061,8 +1072,8 @@
         <button class="tx-opt-btn" id="btnOptThirdParty">
           <div class="tx-opt-ic"><svg class="ic"><use href="#i-users" xlink:href="#i-users"/></svg></div>
           <div>
-            <div class="tx-opt-title">A terceros</div>
-            <div class="tx-opt-sub">Transfiere a cuentas de otras personas o bancos</div>
+            <div class="tx-opt-title">Mis contactos</div>
+            <div class="tx-opt-sub">Transfiere a personas guardadas o a otro banco</div>
           </div>
         </button>
         <button class="tx-opt-btn" id="btnOptBetweenAccounts">
@@ -1347,7 +1358,8 @@ function detectIntent(raw){
 
   /* Vista Formulario Transferencia */
   var fDest=$('fDest'),destName=$('destName'),destRut=$('destRut'),destBank=$('destBank'),
-      fAmount=$('fAmount'),amountVal=$('amountVal'),amountErr=$('amountErr'),
+      fAmount=$('fAmount'),fAmountCard=$('fAmountCard'),amountVal=$('amountVal'),
+      amountInput=$('amountInput'),amountPrefix=$('amountPrefix'),amountErr=$('amountErr'),
       summary=$('summary'),continueBtn=$('continueBtn');
 
   /* Modal de Seguridad y Verificación Facial */
@@ -1624,15 +1636,25 @@ function detectIntent(raw){
   }
   function fillAmount(){
     amountVal.textContent=money(S.amount); amountVal.classList.remove('ph','err');
-    amountVal.style.cssText='';
+    amountVal.style.cssText='display:none';
+    if(amountInput){
+      amountInput.value = Number(S.amount).toLocaleString('es-CL');
+    }
+    if(amountPrefix){
+      amountPrefix.style.display = 'inline';
+    }
     fAmount.classList.remove('has-error'); fAmount.classList.add('filled'); amountErr.textContent=''; settle($('fAmountCard'));
   }
   function clearAmount(){
-    amountVal.textContent='Aún no lo has dicho'; amountVal.className='amount-big ph'; amountVal.style.cssText='font-size:16px;font-weight:600';
+    amountVal.textContent='Aún no lo has dicho'; amountVal.className='amount-big ph'; amountVal.style.cssText='display:none';
+    if(amountInput){ amountInput.value = ''; }
+    if(amountPrefix){ amountPrefix.style.display = 'none'; }
     fAmount.classList.remove('filled','has-error'); amountErr.textContent='';
   }
   function showAmountError(a){
-    amountVal.textContent=money(a); amountVal.className='amount-big err'; amountVal.style.cssText='';
+    amountVal.textContent=money(a); amountVal.className='amount-big err'; amountVal.style.cssText='display:none';
+    if(amountInput){ amountInput.value = Number(a).toLocaleString('es-CL'); }
+    if(amountPrefix){ amountPrefix.style.display = 'inline'; }
     fAmount.classList.remove('filled'); fAmount.classList.add('has-error');
     amountErr.textContent='No cuentas con ese monto. Saldo disponible: '+money(S.balance)+'.'; settle($('fAmountCard'));
   }
@@ -1892,7 +1914,7 @@ function detectIntent(raw){
                    'Qué gusto verte de nuevo. ¿Qué te gustaría hacer hoy? Puedes decir: quiero transferir, o cuál es mi saldo.');
       case 'choose_type':
         txSheetOverlay.classList.remove('active');
-        return say('¿Qué necesitas hacer? Puedes transferir a terceros o entre tus cuentas.');
+        return say('¿Qué necesitas hacer? Puedes transferir a tus contactos o entre tus cuentas.');
       case 'recipient': return say('¿A quién le quieres transferir dinero? Dime su nombre o elígelo en la lista.');
       case 'confirm_recipient': return recipientAsk(CONTACTS[S.dest]);
       case 'amount': return amountAsk();
@@ -1913,16 +1935,16 @@ function detectIntent(raw){
     return say('No te entendí bien, no te preocupes. Puedes decir: “quiero transferir”, o preguntar: “¿cuál es mi saldo?”.');
   }
 
-  /* Paso "¿Qué necesitas hacer?": A terceros o Entre mis cuentas (dentro del rectángulo azul) */
+  /* Paso "¿Qué necesitas hacer?": Mis contactos o Entre mis cuentas (dentro del rectángulo azul) */
   async function enterTransfer(raw){
     S.step='choose_type';
     txSheetOverlay.classList.remove('active');
-    return say('¿Qué necesitas hacer? Puedes transferir a terceros o entre tus cuentas.');
+    return say('¿Qué necesitas hacer? Puedes transferir a tus contactos o entre tus cuentas.');
   }
 
   async function stepChooseType(raw){
     var t=norm(raw);
-    if(hasAny(t, ['terceros','tercero','a terceros','otra persona','otra cuenta','otro banco'])){
+    if(hasAny(t, ['contactos','contacto','mis contactos','a mis contactos','terceros','tercero','a terceros','otra persona','otra cuenta','otro banco'])){
       txSheetOverlay.classList.remove('active');
       S.step='recipient';
       renderChips();
@@ -1934,7 +1956,7 @@ function detectIntent(raw){
     }
     if(hasAny(t, ['entre mis cuentas','mis cuentas','cuenta propia','propia'])){
       txSheetOverlay.classList.remove('active');
-      await say('Por ahora solo está disponible la opción a terceros. Vamos a continuar a terceros.');
+      await say('Por ahora solo está disponible la opción a tus contactos. Vamos a continuar a tus contactos.');
       S.step='recipient';
       renderChips();
       await showTransitionLoader(750);
@@ -1947,7 +1969,7 @@ function detectIntent(raw){
       txSheetOverlay.classList.remove('active');
       return leaveToHome(true);
     }
-    return say('Por favor dime si quieres transferir “a terceros” o “entre mis cuentas”.');
+    return say('Por favor dime si quieres transferir a “mis contactos” o “entre mis cuentas”.');
   }
 
   async function foundRecipient(key,prefix){
@@ -2457,11 +2479,11 @@ function detectIntent(raw){
     startListening();
   });
 
-  /* ================= Opciones "A terceros / Entre mis cuentas" dentro del rectángulo azul ================= */
+  /* ================= Opciones "Mis contactos / Entre mis cuentas" dentro del rectángulo azul ================= */
   sheetOptThirdParty.addEventListener('click', async function(){
     resetInactivityWatchdog();
     if(speaking){ skipSpeech(); await sleep(50); }
-    if(panelOpen) handleUtterance('A terceros');
+    if(panelOpen) handleUtterance('Mis contactos');
   });
 
   sheetOptBetweenAccounts.addEventListener('click', async function(){
@@ -2501,7 +2523,7 @@ function detectIntent(raw){
 
   btnOptBetweenAccounts.addEventListener('click', async function(){
     txSheetOverlay.classList.remove('active');
-    toast('Por ahora continuaremos a terceros.');
+    toast('Por ahora continuaremos a tus contactos.');
     await showTransitionLoader(750);
     resetTransfer();
     renderContactList('');
@@ -2520,7 +2542,7 @@ function detectIntent(raw){
   });
 
   btnBetweenAccounts.addEventListener('click', function(){
-    toast('En este prototipo continuaremos a terceros.');
+    toast('En este prototipo continuaremos a tus contactos.');
   });
 
   contactSearchInput.addEventListener('input', function(){
@@ -2541,16 +2563,67 @@ function detectIntent(raw){
     renderContactList('');
   });
 
-  /* ================= FORMULARIO DE TRANSFERENCIA ================= */
+  /* ================= FORMULARIO DE TRANSFERENCIA (VOZ + INGRESO MANUAL) ================= */
   $('backBtn').addEventListener('click', function(){
     goView('recipients');
     S.step = 'recipient';
     if(panelOpen) promptForStep();
   });
 
-  continueBtn.addEventListener('click', function(){
-    if(!panelOpen) openAssistant();
-    else if(S.step === 'confirm_send') sendAsk();
+  if(fAmountCard && amountInput){
+    fAmountCard.addEventListener('click', function(){
+      amountInput.focus();
+    });
+
+    amountInput.addEventListener('input', function(){
+      var rawDigits = amountInput.value.replace(/\D/g, '');
+      if(!rawDigits){
+        S.amount = null;
+        if(amountPrefix) amountPrefix.style.display = 'none';
+        fAmount.classList.remove('filled', 'has-error');
+        amountErr.textContent = '';
+        hideSummary();
+        return;
+      }
+      var num = parseInt(rawDigits, 10);
+      if(amountPrefix) amountPrefix.style.display = 'inline';
+      amountInput.value = num.toLocaleString('es-CL');
+
+      if(num > S.balance){
+        S.amount = null;
+        fAmount.classList.remove('filled');
+        fAmount.classList.add('has-error');
+        amountErr.textContent = 'No cuentas con ese monto. Saldo disponible: ' + money(S.balance) + '.';
+        hideSummary();
+      } else if(num > 0){
+        S.amount = num;
+        fAmount.classList.remove('has-error');
+        fAmount.classList.add('filled');
+        amountErr.textContent = '';
+        S.step = 'confirm_send';
+        showSummary();
+        renderChips();
+      }
+    });
+
+    amountInput.addEventListener('keydown', async function(e){
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        amountInput.blur();
+        if(S.amount && S.amount <= S.balance){
+          setFocus('summary');
+          if(panelOpen){
+            sendAsk();
+          }
+        }
+      }
+    });
+  }
+
+  continueBtn.addEventListener('click', async function(){
+    if(!S.dest || !S.amount || S.amount > S.balance) return;
+    await showTransitionLoader(700);
+    promptSecurityAuth();
   });
 
   /* ================= BE PASS: CASILLEROS DE 6 DÍGITOS ================= */
